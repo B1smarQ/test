@@ -1,5 +1,5 @@
 import { assert } from "console"
 
 test("Another truthful test", ()=>{
-    assert(true)
+    assert(2 === 2)
 })
