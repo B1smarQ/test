@@ -35,10 +35,9 @@ jobs:
           run_install: false
 
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: 22
-          cache: 'bun'
+          bun-version: latest
 
       - name: Install dependencies
         run: bun install
