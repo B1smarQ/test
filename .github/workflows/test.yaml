@@ -1,10 +1,9 @@
 name: Run tests
 
 on:
-    pull_request:
-        branches: ["*"]
-
-    workflow_dispatch:
+  pull_request:
+    branches: ["*"]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,20 +11,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Install Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-
       - name: Install dependencies
         run: bun install
-
       - name: Build with Next.js
         run: bun run build
 
-
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,9 +28,23 @@ jobs:
       - name: Install Bun
         uses: oven-sh/setup-bun@v2
         with:
-            bun-version: latest
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install
+      - name: Run ESLint
+        run: bun run lint
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [build, lint]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
       - name: Install dependencies
         run: bun install
       - name: Run jest
         run: bun jest
-    needs: build
