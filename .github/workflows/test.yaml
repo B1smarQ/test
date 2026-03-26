@@ -24,5 +24,18 @@ jobs:
       - name: Build with Next.js
         run: bun run build
 
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+            bun-version: latest
+      - name: Install dependencies
+        run: bun install
       - name: Run jest
         run: bun jest
+    needs: build
