@@ -1,4 +1,4 @@
-name: Deploy Next.js site to Pages
+name: Deploy Next.js 
 
 on:
   push:
@@ -35,7 +35,6 @@ jobs:
         id: setup_pages
         uses: actions/configure-pages@v5
 
-      
       - name: Build with Next.js
         run: bun run build
         env:
